@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      width: 800,
+      width: 1000,
       height: 600,
       chartWidth: 300,
       chartHeight: 550,
@@ -37,7 +37,7 @@ export default {
       center: d3.geoCentroid(this.geojson),
       nr: 40,
       pathFnNr: 0,
-      mapScale: 8000,
+      mapScale: 10000,
       duration: 5000,
     };
   },
@@ -49,7 +49,7 @@ export default {
       return d3.geoMercator()
         .center(this.center)
         .scale(this.mapScale)
-        .translate([this.width / 2 + this.margin.left + 20, this.height / 2]);
+        .translate([this.width / 2 + this.margin.left + 30, this.height / 2 - 50]);
     },
     pathGeo() {
       return d3.geoPath().projection(this.projection);
