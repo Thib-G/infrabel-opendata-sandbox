@@ -48,7 +48,8 @@ export default {
     projection() {
       return d3.geoMercator()
         .center(this.center)
-        .scale(this.mapScale);
+        .scale(this.mapScale)
+        .translate([this.width / 2 + this.margin.left + 20, this.height / 2]);
     },
     pathGeo() {
       return d3.geoPath().projection(this.projection);
@@ -80,19 +81,30 @@ export default {
   methods: {
     init() {
       d3.select(this.$refs.map)
-        .selectAll('path').data(this.geojson.features)
+        .selectAll('path.track').data(this.geojson.features)
         .enter()
         .append('path')
         .attr('class', 'track')
         .attr('d', this.pathGeo);
 
       d3.select(this.$refs.chart)
-        .selectAll('path').data(this.topFeatures)
+        .selectAll('path.chart-bg').data(this.topFeatures)
+        .enter()
+        .append('path')
+        .attr('class', 'chart-bg')
+        .attr('d', this.pathRectangleBg)
+        .on('mouseover', this.highlight)
+        .on('mouseout', this.unhighlight);
+
+      d3.select(this.$refs.chart)
+        .selectAll('path.chart').data(this.topFeatures)
         .enter()
         .append('path')
         .attr('class', 'chart')
         .style('stroke', d => this.scale.color(d.properties.length))
-        .attr('d', this.pathRectangle);
+        .attr('d', this.pathRectangle)
+        .on('mouseover', this.highlight)
+        .on('mouseout', this.unhighlight);
 
       d3.select(this.$refs.chart)
         .selectAll('text').data(this.topFeatures)
@@ -102,7 +114,17 @@ export default {
         .attr('x', this.margin.left - 4)
         .attr('y', d => this.margin.top
           + this.scale.y(d.properties.trackcode) + (this.scale.y.bandwidth() / 2) + 3)
-        .text(d => `${d.properties.trackcode} (${Math.round(d.properties.length / 1000)} km)`);
+        .text(d => `${d.properties.trackcode} (${Math.round(d.properties.length / 1000)} km)`)
+        .on('mouseover', this.highlight)
+        .on('mouseout', this.unhighlight);
+    },
+    pathRectangleBg(feature) {
+      const x0 = this.margin.left;
+      const x1 = this.margin.left + this.scale.x(feature.properties.length);
+      const y0 = this.margin.top
+        + this.scale.y(feature.properties.trackcode) + (this.scale.y.bandwidth() / 2);
+
+      return `M${x0} ${y0}L${x1} ${y0}`;
     },
     pathRectangle(feature) {
       // eslint-disable-next-line
@@ -139,21 +161,37 @@ export default {
         .transition(transition)
         .attr('d', this.pathFn);
     },
+    highlight(feature) {
+      d3.selectAll('path.chart, text.chart-text, path.track')
+        .filter(d => d.properties.trackcode === feature.properties.trackcode)
+        .classed('highlighted', true);
+    },
+    unhighlight() {
+      d3.selectAll('path.chart, text.chart-text, path.track')
+        .classed('highlighted', false);
+    },
   },
 };
 </script>
 
 <style scoped>
   .bg {
-    fill: lightgrey;
+    fill: rgb(240, 240, 240);
   }
   svg >>> .track {
     stroke-width: 1px;
     stroke: steelblue;
+    stroke-linecap: round;
     fill: none;
   }
   svg >>> .chart {
     stroke-width: 4px;
+    stroke: white;
+    stroke-linecap: round;
+    fill: none;
+  }
+  svg >>> .chart-bg {
+    stroke-width: 2px;
     stroke: white;
     stroke-linecap: round;
     fill: none;
@@ -166,5 +204,9 @@ export default {
     fill: white;
     stroke: darkgrey;
     stroke-width: 1px;
+  }
+  svg >>> .highlighted {
+    stroke-width: 6px;
+    font-weight: bold;
   }
 </style>
