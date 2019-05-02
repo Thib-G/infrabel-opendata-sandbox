@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h3>This is a showcase of some dataviz made with Infrabel’s open data</h3>
+    <h3>This is a showcase of a few ways to reuse Infrabel’s open data</h3>
     <h1>Length of tracks</h1>
     <LengthOfTracks />
     <hr />
