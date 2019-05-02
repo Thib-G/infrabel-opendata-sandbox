@@ -7,7 +7,9 @@
       </g>
       <g ref="map" />
     </g>
-    <g class="g-chart" ref="chart" />
+    <g class="g-chart" ref="chart">
+      <text :x="margin.left" :y="margin.top - 10">Top {{ nr }}</text>
+    </g>
   </svg>
 </template>
 
@@ -85,7 +87,9 @@ export default {
         .enter()
         .append('path')
         .attr('class', 'track')
-        .attr('d', this.pathGeo);
+        .attr('d', this.pathGeo)
+        .on('mouseover', this.highlight)
+        .on('mouseout', this.unhighlight);
 
       d3.select(this.$refs.chart)
         .selectAll('path.chart-bg').data(this.topFeatures)
@@ -107,7 +111,7 @@ export default {
         .on('mouseout', this.unhighlight);
 
       d3.select(this.$refs.chart)
-        .selectAll('text').data(this.topFeatures)
+        .selectAll('text.chart-text').data(this.topFeatures)
         .enter()
         .append('text')
         .attr('class', 'chart-text')
