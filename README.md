@@ -1,4 +1,8 @@
-# opendata-infrabel
+# Infrabel open-data sandbox
+
+## DEMO
+
+https://thib-g.github.io/infrabel-opendata-sandbox/
 
 ## Project setup
 ```
