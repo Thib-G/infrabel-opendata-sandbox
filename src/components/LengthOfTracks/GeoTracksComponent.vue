@@ -166,12 +166,14 @@ export default {
         .attr('d', this.pathFn);
     },
     highlight(feature) {
-      d3.selectAll('path.chart, text.chart-text, path.track')
+      d3.select(this.$refs.svg)
+        .selectAll('path.chart, text.chart-text, path.track')
         .filter(d => d.properties.trackcode === feature.properties.trackcode)
         .classed('highlighted', true);
     },
     unhighlight() {
-      d3.selectAll('path.chart, text.chart-text, path.track')
+      d3.select(this.$refs.svg)
+        .selectAll('path.chart, text.chart-text, path.track')
         .classed('highlighted', false);
     },
   },
