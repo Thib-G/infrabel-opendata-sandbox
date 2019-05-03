@@ -1,6 +1,6 @@
 <template>
   <svg :width="width" :height="height" ref="svg">
-    <rect x="0" y="0" :width="width" :height="height" class="bg" />
+    <rect x="0" y="0" rx="20" ry="20" :width="width" :height="height" class="bg" />
     <g class="g-map">
       <g>
         <path :d="regionsPath" class="regions" />
