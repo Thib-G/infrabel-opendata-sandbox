@@ -21,4 +21,8 @@ export default {
     return axios.get('https://opendata.infrabel.be/api/datasets/1.0/search', { params: { start } })
       .then(response => response.data);
   },
+  getLineSections() {
+    return axios.get('json/sections-de-lignes.geojson')
+      .then(response => response.data);
+  },
 };

@@ -25,6 +25,14 @@ export default new Router({
       component: () => import(/* webpackChunkName: "length-of-tracks" */ '@/views/LengthOfTracks.vue'),
     },
     {
+      path: '/line-sections',
+      name: 'line-sections',
+      meta: {
+        descr: 'Line sections map',
+      },
+      component: () => import(/* webpackChunkName: "line-sections" */ '@/views/LineSectionsMap.vue'),
+    },
+    {
       path: '/embedded-map',
       name: 'embedded-map',
       meta: {
@@ -38,7 +46,7 @@ export default new Router({
       meta: {
         descr: 'Dataset list from API',
       },
-      component: () => import(/* webpackChunkName: "embedded-map" */ '@/views/ApiDatasetList.vue'),
+      component: () => import(/* webpackChunkName: "dataset-list" */ '@/views/ApiDatasetList.vue'),
     },
     {
       path: '/about',

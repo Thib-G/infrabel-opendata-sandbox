@@ -6,7 +6,7 @@ import { scaleLinear, scaleSequential, scaleBand } from 'd3-scale';
 
 import { transition } from 'd3-transition';
 
-import { interpolateYlOrBr } from 'd3-scale-chromatic';
+import { interpolateYlOrBr, schemeCategory10 } from 'd3-scale-chromatic';
 
 export default {
   select,
@@ -19,4 +19,5 @@ export default {
   scaleBand,
   transition,
   interpolateYlOrBr,
+  schemeCategory10,
 };
