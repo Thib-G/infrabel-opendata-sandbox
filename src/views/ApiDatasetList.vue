@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>Retrieve dataset list from API</p>
-    <p><tt>https://opendata.infrabel.be/api/datasets/1.0/search</tt></p>
+    <p><tt>https://opendata.infrabel.be/api/datasets/1.0/search?start={{ start }}</tt></p>
     <div v-if="datasets">
       <p><b>{{ datasets.nhits }}</b> datasets,
         showing <b>{{ datasets.parameters.start + 1 }}</b> &ndash;
@@ -15,15 +15,15 @@
       <table>
         <thead>
           <tr>
-            <th>Dataset ID</th>
-            <th>Title</th>
+            <th class="right">Dataset ID&nbsp;&nbsp;</th>
+            <th class="left">&nbsp;&nbsp;Title</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="d in datasets.datasets" :key="d.datasetid">
-            <td><a :href="`https://opendata.infrabel.be/explore/dataset/${d.datasetid}`"
+            <td class="right"><a :href="`https://opendata.infrabel.be/explore/dataset/${d.datasetid}`"
               target="_blank">{{ d.datasetid }}</a></td>
-            <td>{{ d.metas.title }}</td>
+            <td class="left">{{ d.metas.title }}</td>
           </tr>
         </tbody>
       </table>
@@ -64,6 +64,11 @@ export default {
   table {
     margin-left: auto;
     margin-right: auto;
+  }
+  .left {
     text-align: left;
+  }
+  .right {
+    text-align: right;
   }
 </style>
