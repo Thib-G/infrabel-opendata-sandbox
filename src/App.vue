@@ -1,12 +1,28 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <template v-for="(route, index) in $router.options.routes">
+        <span :key="route.name">
+          <router-link :to="route.path">{{ route.meta.descr }}</router-link>
+          <span
+            v-if="index < $router.options.routes.length - 1"
+            :key="route.name"> | </span>
+        </span>
+      </template>
     </div>
+    <h1>{{ $route.meta.descr }}</h1>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+};
+</script>
+
 
 <style>
 #app {

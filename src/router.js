@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import Home from '@/views/Home.vue';
 
 Vue.use(Router);
 
@@ -11,11 +11,41 @@ export default new Router({
     {
       path: '/',
       name: 'home',
+      meta: {
+        descr: 'Home',
+      },
       component: Home,
+    },
+    {
+      path: '/length-of-tracks',
+      name: 'length-of-tracks',
+      meta: {
+        descr: 'Length of tracks',
+      },
+      component: () => import(/* webpackChunkName: "length-of-tracks" */ '@/views/LengthOfTracks.vue'),
+    },
+    {
+      path: '/embedded-map',
+      name: 'embedded-map',
+      meta: {
+        descr: 'Embedded map',
+      },
+      component: () => import(/* webpackChunkName: "embedded-map" */ '@/views/EmbeddedMap.vue'),
+    },
+    {
+      path: '/dataset-list',
+      name: 'dataset-list',
+      meta: {
+        descr: 'Dataset list from API',
+      },
+      component: () => import(/* webpackChunkName: "embedded-map" */ '@/views/ApiDatasetList.vue'),
     },
     {
       path: '/about',
       name: 'about',
+      meta: {
+        descr: 'About',
+      },
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <p>This visualisation animates the top longest main tracks</p>
+    <p>
+      This visualisation animates the top longest main tracks.
+      <br />Click on <a href @click.prevent="animate">animate</a>.
+    </p>
     <GeoTracksComponent
       v-if="geojson && regions"
       :geojson="geojson"
@@ -8,7 +11,7 @@
       ref="geo"
     />
     <div>
-      <button @click="animate()">Animate</button>
+      <button @click="animate">Animate</button>
     </div>
     <h3>Sources</h3>
     <p>Infrabel Open Data: &laquo;&nbsp;<a href="https://opendata.infrabel.be/explore/dataset/geovoies/"
