@@ -75,7 +75,7 @@ export default {
       return { x, y, color };
     },
     pathFn() {
-      return this.pathFnNr === 0 ? this.pathRectangle : this.pathGeo;
+      return this.pathFnNr === 0 ? this.pathHistogram : this.pathGeo;
     },
     regionsPath() {
       return this.pathGeo(this.regions);
@@ -97,7 +97,7 @@ export default {
         .enter()
         .append('path')
         .attr('class', 'chart-bg')
-        .attr('d', this.pathRectangleBg)
+        .attr('d', this.pathHistogramBg)
         .on('mouseover', this.highlight)
         .on('mouseout', this.unhighlight);
 
@@ -107,7 +107,7 @@ export default {
         .append('path')
         .attr('class', 'chart')
         .style('stroke', d => this.scale.color(d.properties.length))
-        .attr('d', this.pathRectangle)
+        .attr('d', this.pathHistogram)
         .on('mouseover', this.highlight)
         .on('mouseout', this.unhighlight);
 
@@ -123,7 +123,7 @@ export default {
         .on('mouseover', this.highlight)
         .on('mouseout', this.unhighlight);
     },
-    pathRectangleBg(feature) {
+    pathHistogramBg(feature) {
       const x0 = this.margin.left;
       const x1 = this.margin.left + this.scale.x(feature.properties.length);
       const y0 = this.margin.top
@@ -131,7 +131,7 @@ export default {
 
       return `M${x0} ${y0}L${x1} ${y0}`;
     },
-    pathRectangle(feature) {
+    pathHistogram(feature) {
       // eslint-disable-next-line
       const mergedCoordinates = [].concat.apply([], feature.geometry.coordinates);
       const x1 = this.scale.x(feature.properties.length);
