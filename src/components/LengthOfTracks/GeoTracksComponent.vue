@@ -40,8 +40,8 @@ export default {
       nr: 40,
       pathFnNr: 0,
       mapScale: 10000,
-      delay: 50,
-      duration: 5000,
+      delay: 60,
+      duration: 4000,
     };
   },
   mounted() {
