@@ -2,7 +2,17 @@ import axios from 'axios';
 
 export default {
   getGeoTracks() {
-    return axios.get('json/geovoies-simpl.geojson').then(response => response.data);
+    return axios.get('json/geovoies-simpl.geojson').then((response) => {
+      response.data.features.forEach((feature) => {
+        feature.geometry.coordinates.forEach((coord) => {
+          if (coord[0][0] > coord[coord.length - 1][0]) {
+            coord.reverse();
+          }
+        });
+        feature.geometry.coordinates.sort((a, b) => a[0][0] - b[0][0]);
+      });
+      return response.data;
+    });
   },
   getRegions() {
     return axios.get('json/regions.geojson').then(response => response.data);
