@@ -2,7 +2,7 @@
   <div>
     <p>
       This visualisation animates the top longest main tracks.
-      <br />Click on <a href @click.prevent="animate">animate</a>.
+      <br />Click <a href @click.prevent="animate">Play</a>.
     </p>
     <LengthOfTracksGeo
       v-if="geojson && regions"
@@ -11,7 +11,7 @@
       ref="geo"
     />
     <div>
-      <button @click="animate">Animate</button>
+      <button @click="animate">Play</button>
     </div>
     <h3>Sources</h3>
     <p>Infrabel Open Data: &laquo;&nbsp;<a href="https://opendata.infrabel.be/explore/dataset/geovoies/"
