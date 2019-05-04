@@ -4,7 +4,7 @@
       This visualisation animates the top longest main tracks.
       <br />Click on <a href @click.prevent="animate">animate</a>.
     </p>
-    <GeoTracksComponent
+    <LengthOfTracksGeo
       v-if="geojson && regions"
       :geojson="geojson"
       :regions="regions"
@@ -27,7 +27,7 @@
 <script>
 // @ is an alias to /src
 import InfrabelService from '@/services/infrabel-service';
-import GeoTracksComponent from '@/components/LengthOfTracks/GeoTracksComponent.vue';
+import LengthOfTracksGeo from '@/components/LengthOfTracksGeo.vue';
 
 export default {
   data() {
@@ -57,7 +57,7 @@ export default {
     },
   },
   components: {
-    GeoTracksComponent,
+    LengthOfTracksGeo,
   },
 };
 </script>
