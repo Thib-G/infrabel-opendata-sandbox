@@ -162,7 +162,12 @@ export default {
         .selectAll('path.chart')
         .transition()
         .duration(this.duration)
-        .delay((d, i) => i * this.delay)
+        .delay((d, i, nodes) => {
+          if (this.pathFnNr === 1) {
+            return i * this.delay;
+          }
+          return (nodes.length - 1 - i) * this.delay;
+        })
         .attr('d', this.pathFn);
     },
     highlight(feature) {
