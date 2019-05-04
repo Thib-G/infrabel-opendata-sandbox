@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <template v-for="(route, index) in $router.options.routes">
+      <template v-for="(route, index) in activeRoutes">
         <span :key="route.name">
           <router-link :to="route.path">{{ route.meta.descr }}</router-link>
           <span
@@ -19,6 +19,11 @@
 export default {
   data() {
     return {};
+  },
+  computed: {
+    activeRoutes() {
+      return this.$router.options.routes.filter(r => r.name !== 'home');
+    },
   },
 };
 </script>

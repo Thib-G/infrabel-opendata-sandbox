@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/views/Home.vue';
+// import Home from '@/views/Home.vue';
 
 Vue.use(Router);
 
@@ -14,7 +14,8 @@ export default new Router({
       meta: {
         descr: 'Home',
       },
-      component: Home,
+      // component: Home,
+      redirect: '/length-of-tracks',
     },
     {
       path: '/length-of-tracks',
