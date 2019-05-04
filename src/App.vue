@@ -5,7 +5,7 @@
         <span :key="route.name">
           <router-link :to="route.path">{{ route.meta.descr }}</router-link>
           <span
-            v-if="index < $router.options.routes.length - 1"
+            v-if="index < activeRoutes - 1"
             :key="route.name"> | </span>
         </span>
       </template>
