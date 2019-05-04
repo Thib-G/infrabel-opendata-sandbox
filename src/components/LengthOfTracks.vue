@@ -15,7 +15,7 @@
       target="_blank">Liste
       et position géographique des voies principales</a>&nbsp;&raquo;.</p>
     <p>The dataset was simplified using QGIS with the Douglas-Peucker
-      algorithm and a precision of 1m.</p>
+      algorithm and a precision of 50m.</p>
     <p>Atlas de Belgique: <a href="http://www.atlas-belgique.be/cms2/index.php?page=cartodata_fr"
       target="_blank">régions</a>.</p>
   </div>

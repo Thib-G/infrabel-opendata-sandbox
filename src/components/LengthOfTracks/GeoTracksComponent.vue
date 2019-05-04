@@ -40,6 +40,7 @@ export default {
       nr: 40,
       pathFnNr: 0,
       mapScale: 10000,
+      delay: 50,
       duration: 5000,
     };
   },
@@ -141,28 +142,27 @@ export default {
       // so we divide the line in equal parts
       let points = '';
       let i = 0;
-      let p1 = '';
+      let p1 = `${this.margin.left} ${y0}`;
       feature.geometry.coordinates.forEach((subpath) => {
+        points += `M${p1}`;
         subpath.forEach((v, j) => {
-          p1 = `${this.margin.left + ((x1 * i) / mergedCoordinates.length)} ${y0}`;
-          if (j === 0) {
-            points += 'M';
-          } else {
-            points += 'L';
+          p1 = `${this.margin.left + ((x1 * (i + 1)) / mergedCoordinates.length)} ${y0}`;
+          if (j !== 0) {
+            points += `L${p1}`;
           }
-          points += `${p1}`;
           i += 1;
         });
       });
 
-      return `${points}`;
+      return points;
     },
     animate() {
       this.pathFnNr = (this.pathFnNr + 1) % 2;
-      const transition = d3.transition().duration(this.duration);
       d3.select(this.$refs.chart)
         .selectAll('path.chart')
-        .transition(transition)
+        .transition()
+        .duration(this.duration)
+        .delay((d, i) => i * this.delay)
         .attr('d', this.pathFn);
     },
     highlight(feature) {
