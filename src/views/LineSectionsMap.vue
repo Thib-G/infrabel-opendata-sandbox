@@ -4,13 +4,25 @@
     <div class="map" ref="map">
     </div>
     <div>
-      <select v-model="selected">
+      Select property: <select v-model="selected">
         <option v-for="p in propList" :key="p" :value="p">{{ p }}</option>
       </select>
     </div>
+    <h3>Legend: {{ selected }}</h3>
+    <p>
+      <ul>
+        <li v-for="v in scaleColor.domain()" :key="v">
+          <svg width="20" height="10">
+            <line class="legend-line" x1="0" x2="20" y1="5" y2="5"
+              :style="{ stroke: scaleColor(v) }" />
+          </svg> {{ v }}
+        </li>
+      </ul>
+    </p>
     <h3>Sources</h3>
     <p><a href="https://opendata.infrabel.be/explore/dataset/segmentatie-volgens-de-eigenschappen-van-de-infrastructuur-en-de-exploitatiemoge"
       target="_blank">Section de lignes</a></p>
+    <p><tt>https://opendata.infrabel.be/api/v2/catalog/datasets/segmentatie-volgens-de-eigenschappen-van-de-infrastructuur-en-de-exploitatiemoge/exports/geojson?rows=-1&timezone=UTC&pretty=false</tt></p>
   </div>
 </template>
 
@@ -21,6 +33,7 @@ import L from 'leaflet';
 
 import { mapBoxKey } from '@/assets/keys';
 import InfrabelService from '@/services/infrabel-service';
+import d3 from '@/assets/d3';
 
 // eslint-disable-next-line
 delete L.Icon.Default.prototype._getIconUrl;
@@ -36,6 +49,7 @@ L.Icon.Default.mergeOptions({
 export default {
   data() {
     return {
+      map: undefined,
       infrabelService: InfrabelService,
       zoom: 8,
       belgiumCenterLatLng: [50 + (38 / 60) + (28 / 3600), 4 + (40 / 60) + (5 / 3600)],
@@ -69,7 +83,7 @@ export default {
           },
         ),
       },
-      selected: undefined,
+      selected: 'nrtracks',
       featureGroup: L.featureGroup(),
       lineSections: undefined,
     };
@@ -79,7 +93,7 @@ export default {
     this.getLineSections();
   },
   watch: {
-    lineSections() {
+    byValues() {
       this.updateLineSections();
     },
     selected() {
@@ -92,6 +106,19 @@ export default {
         return [];
       }
       return Object.keys(this.lineSections.features[0].properties);
+    },
+    byValues() {
+      if (!this.lineSections) {
+        return [];
+      }
+      return d3.nest()
+        .key(d => d.properties[this.selected])
+        .entries(this.lineSections.features);
+    },
+    scaleColor() {
+      return d3.scaleOrdinal()
+        .range(d3.schemeCategory10)
+        .domain(this.byValues.map(d => d.key));
     },
   },
   methods: {
@@ -111,25 +138,30 @@ export default {
     },
     updateLineSections() {
       this.featureGroup.clearLayers();
-      const geoJson = L.geoJson(this.lineSections, {
-        onEachFeature: (feature, layer) => {
-          const popupHTML = document.createElement('div');
-          let contentHTML = '';
-          Object.keys(feature.properties).forEach((key) => {
-            if (key === this.selected) {
-              contentHTML += '<mark>';
-            }
-            contentHTML += `${key}: ${feature.properties[key]}`;
-            if (key === this.selected) {
-              contentHTML += '</mark>';
-            }
-            contentHTML += '<br />';
-          });
-          popupHTML.innerHTML = contentHTML;
-          layer.bindPopup(popupHTML);
-        },
+      this.byValues.forEach((v) => {
+        const geoJson = L.geoJson(v.values, {
+          onEachFeature: (feature, layer) => {
+            const popupHTML = document.createElement('div');
+            let contentHTML = '';
+            Object.keys(feature.properties).forEach((key) => {
+              if (key === this.selected) {
+                contentHTML += '<mark>';
+              }
+              contentHTML += `${key}: ${feature.properties[key]}`;
+              if (key === this.selected) {
+                contentHTML += '</mark>';
+              }
+              contentHTML += '<br />';
+            });
+            popupHTML.innerHTML = contentHTML;
+            layer.bindPopup(popupHTML);
+          },
+          style: feature => ({
+            color: this.scaleColor(feature.properties[this.selected]),
+          }),
+        });
+        this.featureGroup.addLayer(geoJson);
       });
-      this.featureGroup.addLayer(geoJson);
     },
   },
 };
@@ -141,5 +173,11 @@ export default {
     height: 600px;
     margin-left: auto;
     margin-right: auto;
+  }
+  .legend-line {
+    stroke-width: 4px;
+  }
+  li {
+    list-style: none;
   }
 </style>
