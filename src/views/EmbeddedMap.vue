@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div>
+    <p>
       It is possible to embed a map directly from the portal with an <tt>iframe</tt>.
-    </div>
+      <br />Here I have made a <a href="https://opendata.infrabel.be/map/electrification/"
+        target="_blank">map showing the type of electrification</a>
+        in a few clicks on the portal.
+    </p>
     <div width="800" height="600">
-      <iframe src="https://opendata.infrabel.be/explore/embed/dataset/geovoies/map/?disjunctive.trackcode&disjunctive.linecalfa&location=8,50.52608,4.37503&basemap=jawg.streets" width="800" height="600" frameborder="0"></iframe>
+      <iframe frameborder="0" width="800" height="600" src="https://opendata.infrabel.be/map/embed/electrification/?&static=false&scrollWheelZoom=true"></iframe>
     </div>
   </div>
 </template>
