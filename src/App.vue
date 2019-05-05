@@ -3,7 +3,9 @@
     <div id="nav">
       <template v-for="(route, index) in activeRoutes">
         <span :key="route.name">
-          <router-link :to="route.path">{{ route.meta.descr }}</router-link>
+          <keep-alive>
+            <router-link :to="route.path">{{ route.meta.descr }}</router-link>
+          </keep-alive>
           <span
             v-if="index < activeRoutes.length - 1"
             :key="route.name"> | </span>
