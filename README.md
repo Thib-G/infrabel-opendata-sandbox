@@ -2,7 +2,7 @@
 
 ## DEMO
 
-https://thib-g.github.io/infrabel-opendata-sandbox/
+https://infrabel-opendata.goelff.be
 
 ## Project setup
 ```
