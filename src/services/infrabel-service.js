@@ -22,7 +22,7 @@ export default {
       .then(response => response.data);
   },
   getLineSections() {
-    return axios.get('https://opendata.infrabel.be/api/v2/catalog/datasets/segmentatie-volgens-de-eigenschappen-van-de-infrastructuur-en-de-exploitatiemoge/exports/geojson?rows=-1&timezone=UTC&pretty=false')
+    return axios.get('https://opendata.infrabel.be/api/v2/catalog/datasets/lijnsecties/exports/geojson?rows=-1&timezone=UTC&pretty=false')
       .then(response => response.data);
   },
 };
