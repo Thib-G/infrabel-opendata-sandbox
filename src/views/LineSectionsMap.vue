@@ -21,10 +21,10 @@
       </ul>
     </p>
     <h3>Sources</h3>
-    <p><a href="https://opendata.infrabel.be/explore/dataset/segmentatie-volgens-de-eigenschappen-van-de-infrastructuur-en-de-exploitatiemoge"
+    <p><a href="https://opendata.infrabel.be/explore/dataset/lijnsecties"
       target="_blank">Section de lignes</a></p>
     <p>This map retrieves the data directly from Infrabel Open Data portal using the API:</p>
-    <p><tt>https://opendata.infrabel.be/api/v2/catalog/datasets/segmentatie-volgens-de-eigenschappen-van-de-infrastructuur-en-de-exploitatiemoge/exports/geojson?rows=-1&timezone=UTC&pretty=false</tt></p>
+    <p><tt>https://opendata.infrabel.be/api/v2/catalog/datasets/lijnsecties/exports/geojson?rows=-1&amp;timezone=UTC&amp;pretty=false</tt></p>
   </div>
 </template>
 
