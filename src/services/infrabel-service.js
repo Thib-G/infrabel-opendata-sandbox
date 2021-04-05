@@ -15,14 +15,14 @@ export default {
     });
   },
   getRegions() {
-    return axios.get('json/regions.geojson').then(response => response.data);
+    return axios.get('json/regions.geojson').then((response) => response.data);
   },
   getDatasets(start = 0) {
     return axios.get('https://opendata.infrabel.be/api/datasets/1.0/search', { params: { start } })
-      .then(response => response.data);
+      .then((response) => response.data);
   },
   getLineSections() {
     return axios.get('https://opendata.infrabel.be/api/v2/catalog/datasets/lijnsecties/exports/geojson?rows=-1&timezone=UTC&pretty=false')
-      .then(response => response.data);
+      .then((response) => response.data);
   },
 };

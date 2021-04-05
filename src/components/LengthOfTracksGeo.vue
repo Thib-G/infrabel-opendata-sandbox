@@ -65,13 +65,13 @@ export default {
     scale() {
       const x = d3.scaleLinear()
         .range([0, this.chartWidth])
-        .domain([0, Math.max(...this.topFeatures.map(f => f.properties.length))]);
+        .domain([0, Math.max(...this.topFeatures.map((f) => f.properties.length))]);
       const y = d3.scaleBand()
         .range([0, this.chartHeight])
-        .domain(this.topFeatures.map(f => f.properties.trackcode))
+        .domain(this.topFeatures.map((f) => f.properties.trackcode))
         .padding(0.1);
       const color = d3.scaleSequential(d3.interpolateYlOrBr)
-        .domain([0, Math.max(...this.topFeatures.map(f => f.properties.length))]);
+        .domain([0, Math.max(...this.topFeatures.map((f) => f.properties.length))]);
       return { x, y, color };
     },
     pathFn() {
@@ -106,7 +106,7 @@ export default {
         .enter()
         .append('path')
         .attr('class', 'chart')
-        .style('stroke', d => this.scale.color(d.properties.length))
+        .style('stroke', (d) => this.scale.color(d.properties.length))
         .attr('d', this.pathHistogram)
         .on('mouseover', this.highlight)
         .on('mouseout', this.unhighlight);
@@ -117,9 +117,9 @@ export default {
         .append('text')
         .attr('class', 'chart-text')
         .attr('x', this.margin.left - 4)
-        .attr('y', d => this.margin.top
+        .attr('y', (d) => this.margin.top
           + this.scale.y(d.properties.trackcode) + (this.scale.y.bandwidth() / 2) + 3)
-        .text(d => `${d.properties.trackcode} (${Math.round(d.properties.length / 1000)} km)`)
+        .text((d) => `${d.properties.trackcode} (${Math.round(d.properties.length / 1000)} km)`)
         .on('mouseover', this.highlight)
         .on('mouseout', this.unhighlight);
     },
@@ -173,7 +173,7 @@ export default {
     highlight(feature) {
       d3.select(this.$refs.svg)
         .selectAll('path.chart, text.chart-text, path.track')
-        .filter(d => d.properties.trackcode === feature.properties.trackcode)
+        .filter((d) => d.properties.trackcode === feature.properties.trackcode)
         .classed('highlighted', true);
     },
     unhighlight() {
