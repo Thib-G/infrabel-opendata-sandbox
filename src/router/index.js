@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import LengthOfTracks from '@/views/LengthOfTracks.vue';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -19,7 +21,7 @@ const routes = [
     meta: {
       descr: 'Length of tracks',
     },
-    component: () => import(/* webpackChunkName: "length-of-tracks" */ '@/views/LengthOfTracks.vue'),
+    component: LengthOfTracks,
   },
   {
     path: '/line-sections',

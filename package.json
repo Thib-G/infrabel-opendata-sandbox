@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "d3-array": "^2.12.1",
+    "d3-array": "^2.9.1",
     "d3-collection": "^1.0.7",
     "d3-geo": "^2.0.1",
     "d3-scale": "^3.2.4",
