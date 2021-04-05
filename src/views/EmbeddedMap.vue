@@ -7,7 +7,7 @@
         in a few clicks on the portal.
     </p>
     <div width="800" height="600">
-      <iframe frameborder="0" width="800" height="600" src="https://opendata.infrabel.be/map/embed/electrification/?&static=false&scrollWheelZoom=true"></iframe>
+      <iframe frameborder="0" width="800" height="600" src="https://opendata.infrabel.be/map/embed/sections/?&static=false&scrollWheelZoom=false"></iframe>
     </div>
   </div>
 </template>
