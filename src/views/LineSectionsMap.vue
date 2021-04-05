@@ -33,9 +33,9 @@
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-import { mapBoxKey } from '@/assets/keys';
 import InfrabelService from '@/services/infrabel-service';
 import d3 from '@/assets/d3';
+import basemaps from '@/assets/map/basemaps';
 
 // eslint-disable-next-line
 delete L.Icon.Default.prototype._getIconUrl;
@@ -55,36 +55,7 @@ export default {
       infrabelService: InfrabelService,
       zoom: 8,
       belgiumCenterLatLng: [50 + (38 / 60) + (28 / 3600), 4 + (40 / 60) + (5 / 3600)],
-      basemaps: {
-        dark: L.tileLayer(
-          `https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}@2x.png?access_token=${mapBoxKey}`,
-          {
-            attribution: `&copy; <a href="https://www.mapbox.com/feedback/">Mapbox</a>
-                        &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>`,
-          },
-        ),
-        light: L.tileLayer(
-          `https://api.mapbox.com/v4/mapbox.light/{z}/{x}/{y}@2x.png?access_token=${mapBoxKey}`,
-          {
-            attribution: `&copy; <a href="https://www.mapbox.com/feedback/">Mapbox</a>
-                        &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>`,
-          },
-        ),
-        streets: L.tileLayer(
-          `https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}@2x.png?access_token=${mapBoxKey}`,
-          {
-            attribution: `&copy; <a href="https://www.mapbox.com/feedback/">Mapbox</a>
-                        &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>`,
-          },
-        ),
-        satellite: L.tileLayer(
-          `https://api.mapbox.com/v4/mapbox.streets-satellite/{z}/{x}/{y}@2x.png?access_token=${mapBoxKey}`,
-          {
-            attribution: `&copy; <a href="https://www.mapbox.com/feedback/">Mapbox</a>
-                        &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>`,
-          },
-        ),
-      },
+      basemaps: basemaps(),
       selected: 'nrtracks',
       featureGroup: L.featureGroup(),
       lineSections: undefined,
@@ -114,13 +85,13 @@ export default {
         return [];
       }
       return d3.nest()
-        .key(d => d.properties[this.selected])
+        .key((d) => d.properties[this.selected])
         .entries(this.lineSections.features);
     },
     scaleColor() {
       return d3.scaleOrdinal()
         .range(d3.schemeCategory10)
-        .domain(this.byValues.map(d => d.key));
+        .domain(this.byValues.map((d) => d.key));
     },
   },
   methods: {
@@ -158,7 +129,7 @@ export default {
             popupHTML.innerHTML = contentHTML;
             layer.bindPopup(popupHTML);
           },
-          style: feature => ({
+          style: (feature) => ({
             color: this.scaleColor(feature.properties[this.selected]),
           }),
         });
