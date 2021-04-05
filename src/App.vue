@@ -24,12 +24,11 @@ export default {
   },
   computed: {
     activeRoutes() {
-      return this.$router.options.routes.filter(r => r.name !== 'home');
+      return this.$router.options.routes.filter((r) => r.name !== 'home');
     },
   },
 };
 </script>
-
 
 <style>
 #app {
