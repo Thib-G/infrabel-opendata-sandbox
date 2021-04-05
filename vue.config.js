@@ -10,5 +10,10 @@ module.exports = {
     'd3-collection',
     'd3-array',
     'd3-scale-chromatic',
+    'd3-interpolate',
+    'd3-format',
+    'd3-time',
+    'd3-time-format',
+    'internmap',
   ],
 };
