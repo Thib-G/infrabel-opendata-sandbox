@@ -8,12 +8,13 @@
           </keep-alive>
           <span
             v-if="index < activeRoutes.length - 1"
-            :key="route.name"> | </span>
+            :key="route.name"
+          > | </span>
         </span>
       </template>
     </div>
     <h1>{{ $route.meta.descr }}</h1>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
