@@ -1,14 +1,35 @@
 <template>
-  <svg :width="width" :height="height" ref="svg">
-    <rect x="0" y="0" rx="20" ry="20" :width="width" :height="height" class="bg" />
+  <svg
+    :width="width"
+    :height="height"
+    ref="svg"
+  >
+    <rect
+      x="0"
+      y="0"
+      rx="20"
+      ry="20"
+      :width="width"
+      :height="height"
+      class="bg"
+    />
     <g class="g-map">
       <g>
-        <path :d="regionsPath" class="regions" />
+        <path
+          :d="regionsPath"
+          class="regions"
+        />
       </g>
       <g ref="map" />
     </g>
-    <g class="g-chart" ref="chart">
-      <text :x="margin.left" :y="margin.top - 10">Top {{ nr }}</text>
+    <g
+      class="g-chart"
+      ref="chart"
+    >
+      <text
+        :x="margin.left"
+        :y="margin.top - 10"
+      >Top {{ nr }}</text>
     </g>
   </svg>
 </template>
@@ -170,7 +191,7 @@ export default {
         })
         .attr('d', this.pathFn);
     },
-    highlight(feature) {
+    highlight(event, feature) {
       d3.select(this.$refs.svg)
         .selectAll('path.chart, text.chart-text, path.track')
         .filter((d) => d.properties.trackcode === feature.properties.trackcode)

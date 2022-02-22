@@ -3,26 +3,50 @@
     <p>
       Show line sections with attributes. Select property:
       <select v-model="selected">
-        <option v-for="p in propList" :key="p" :value="p">{{ p }}</option>
+        <option
+          v-for="p in propList"
+          :key="p"
+          :value="p"
+        >
+          {{ p }}
+        </option>
       </select>
-      <br />Legend below.
+      <br>Legend below.
     </p>
-    <div class="map" ref="map">
-    </div>
+    <div
+      class="map"
+      ref="map"
+    />
     <h3>Legend: {{ selected }}</h3>
     <p>
       <ul>
-        <li v-for="v in scaleColor.domain()" :key="v">
-          <svg width="20" height="10">
-            <line class="legend-line" x1="0" x2="20" y1="5" y2="5"
-              :style="{ stroke: scaleColor(v) }" />
+        <li
+          v-for="v in scaleColor.domain()"
+          :key="v"
+        >
+          <svg
+            width="20"
+            height="10"
+          >
+            <line
+              class="legend-line"
+              x1="0"
+              x2="20"
+              y1="5"
+              y2="5"
+              :style="{ stroke: scaleColor(v) }"
+            />
           </svg> {{ v }}
         </li>
       </ul>
     </p>
     <h3>Sources</h3>
-    <p><a href="https://opendata.infrabel.be/explore/dataset/lijnsecties"
-      target="_blank">Section de lignes</a></p>
+    <p>
+      <a
+        href="https://opendata.infrabel.be/explore/dataset/lijnsecties"
+        target="_blank"
+      >Section de lignes</a>
+    </p>
     <p>This map retrieves the data directly from Infrabel Open Data portal using the API:</p>
     <p><tt>https://opendata.infrabel.be/api/v2/catalog/datasets/lijnsecties/exports/geojson?rows=-1&amp;timezone=UTC&amp;pretty=false</tt></p>
   </div>
@@ -91,7 +115,7 @@ export default {
     scaleColor() {
       return d3.scaleOrdinal()
         .range(d3.schemeCategory10)
-        .domain(this.byValues.map((d) => d.key));
+        .domain(this.byValues.map((d) => `${d.key}`));
     },
   },
   methods: {
