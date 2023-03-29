@@ -1,0 +1,5 @@
+streamlit
+pandas
+duckdb
+plotly
+streamlit_agraph
