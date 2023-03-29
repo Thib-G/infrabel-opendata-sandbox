@@ -224,7 +224,6 @@ st.write("""
 linked_ptcars = get_linked_ptcars(df_trains, df_ptcars_attributes, ptcar)
 
 st.write(linked_ptcars)
-st.map(data=linked_ptcars)
 
 
 def create_agraph(nodes, edges):
@@ -262,3 +261,6 @@ nodes = [(i, node) for i, node in enumerate([ptcar] + linked_ptcars['longnamefre
 edges = [(0, i + 1) for i, _ in enumerate(nodes[1:])]
 
 create_agraph(nodes, edges)
+
+
+st.map(data=linked_ptcars)
