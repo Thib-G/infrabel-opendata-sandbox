@@ -184,17 +184,18 @@ def get_linked_ptcars(df_trains, df_ptcars_attributes, ptcar='CHARLEROI-CENTRAL'
     return result
 
 
-df_raw = import_trains()
-df_trains = prepare_trains(df_raw)
-df_ptcars = get_ptcars(df_trains)
-df_ptcars_attributes = import_ptcars()
-
-
 st.write("""
     # Station stats
 
     Stats by station from [Infrabel Open Data](https://opendata.infrabel.be/explore/dataset/stiptheid-gegevens-maandelijksebestanden/information/)
 """)
+
+
+df_raw = import_trains()
+df_trains = prepare_trains(df_raw)
+df_ptcars = get_ptcars(df_trains)
+df_ptcars_attributes = import_ptcars()
+
 
 st.write("""
     ## PTCARs
