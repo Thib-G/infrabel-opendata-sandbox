@@ -1,3 +1,3 @@
 # Test Streamlit app
 
-https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com/Thib-G/infrabel-opendata-sandbox/master/streamlit/azuredeploy.json
+Follow https://towardsdatascience.com/deploying-a-streamlit-web-app-with-azure-app-service-1f09a2159743 to deploy to Azure
