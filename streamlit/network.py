@@ -193,7 +193,7 @@ df_ptcars_attributes = import_ptcars()
 st.write("""
     # Station stats
 
-    Stats by station from Infrabel Open Data
+    Stats by station from [Infrabel Open Data](https://opendata.infrabel.be/explore/dataset/stiptheid-gegevens-maandelijksebestanden/information/)
 """)
 
 st.write("""
