@@ -8,7 +8,10 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
     curl \
-    && rm -rf /var/lib/apt/lists/*
+    wget \
+    && rm -rf /var/lib/apt/lists/* \
+    && wget -O Data_raw_punctuality_202302.csv https://fr.ftp.opendatasoft.com/infrabel/PunctualityHistory/Data_raw_punctuality_202302.csv \
+    && wget -O operationele-punten-van-het-newterk.json https://opendata.infrabel.be/api/explore/v2.1/catalog/datasets/operationele-punten-van-het-newterk/exports/json?lang=fr&timezone=Europe%2FBerlin
 
 RUN pip install -r requirements.txt
 
