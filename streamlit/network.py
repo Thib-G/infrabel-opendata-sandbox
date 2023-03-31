@@ -202,7 +202,11 @@ st.write("""
 
     Select PTCAR
 """)
-ptcar = st.selectbox('PTCAR', df_ptcars)
+ptcar = st.selectbox(
+    label='PTCAR',
+    options=df_ptcars,
+    index=int(df_ptcars.index[df_ptcars['PTCAR_1'] == 'CHARLEROI-CENTRAL'][0]),
+)
 
 st.write(f"""
     ## Stats for {ptcar}
